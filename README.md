@@ -19,6 +19,14 @@ npm run build
 npm run start
 ```
 
+정적 export 결과물 확인:
+
+```bash
+npm run build
+```
+
+빌드가 끝나면 `out/` 디렉터리에 Cloudflare Pages가 바로 배포할 정적 파일이 생성됩니다.
+
 ## 폴더 구조
 
 ```text
@@ -80,3 +88,21 @@ public/images/character/
 - 갤러리 이미지 소스 교체 및 실제 모달 뷰 확장
 - 노이즈, glow, hover 강도만 재조정해 정서 밀도 미세 조정
 - 섹션 수를 늘리더라도 현재의 레이어 분리 구조를 유지한 채 확장
+
+## Cloudflare 배포 메모
+
+이 프로젝트는 서버 기능이 없는 정적 프로토타입이므로 Cloudflare에서는 `Pages`의 정적 export 방식으로 배포하는 것이 가장 안정적입니다.
+
+- Framework preset: `Next.js (Static HTML Export)`
+- Build command: `npx next build`
+- Build output directory: `out`
+- Production branch: `main`
+
+중요한 설정은 이미 코드에 반영되어 있습니다.
+
+- `output: "export"`: Next.js가 `out/` 정적 산출물을 생성
+- `images.unoptimized: true`: 정적 export에서 지원되지 않는 기본 이미지 최적화 경로 비활성화
+- `trailingSlash: true`: 정적 호스팅 환경에서 경로 매칭을 더 단순하게 유지
+
+따라서 Cloudflare의 일반 Next.js SSR/Workers 프리셋 대신, 이 프로젝트는 정적 export 프리셋으로 배포해야 합니다.  
+만약 Cloudflare에서 `Node.js Compatibility` 관련 오류가 보였다면, 서버 런타임 경로로 감지되거나 잘못된 프리셋으로 배포된 경우일 가능성이 큽니다.
