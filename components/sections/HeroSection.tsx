@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from "motion/react";
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
 import { DerivedImageLayer } from "@/components/DerivedImageLayer";
 import { FloatingLayer } from "@/components/FloatingLayer";
@@ -11,21 +13,23 @@ import { infectedTheme } from "@/config/theme";
 
 export function HeroSection() {
   const { hero } = siteContent;
+  const heroRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const bannerOpacity = useTransform(scrollYProgress, [0.52, 0.86], [0, 1]);
+  const bannerY = useTransform(scrollYProgress, [0.52, 0.86], [92, 0]);
+  const bannerScale = useTransform(scrollYProgress, [0.52, 0.86], [0.94, 1]);
 
   return (
-    <section className="relative min-h-screen overflow-hidden px-6 pb-16 pt-24 md:px-10 md:pt-32">
+    <section ref={heroRef} className="relative min-h-screen overflow-hidden px-6 pb-32 pt-24 md:px-10 md:pb-40 md:pt-32">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 opacity-80">
           <DerivedImageLayer asset={derivedAssets.fullCity} className="scale-[1.12]" priority />
         </div>
         <div className="absolute inset-0 opacity-55">
           <DerivedImageLayer asset={derivedAssets.redHazeCity} className="scale-[1.22]" />
-        </div>
-        <div className="absolute right-[-10%] top-[-12%] h-[122%] w-[92%] md:right-[-6%] md:top-[-10%] md:w-[74%]">
-          <DerivedImageLayer asset={derivedAssets.fullClose} className="origin-center" priority />
-        </div>
-        <div className="absolute right-[12%] top-[4%] h-[42%] w-[38%] md:right-[16%] md:top-[8%] md:h-[38%] md:w-[26%]">
-          <DerivedImageLayer asset={derivedAssets.eyeCrop} className="opacity-75" />
         </div>
         <div
           className="absolute inset-0"
@@ -124,6 +128,36 @@ export function HeroSection() {
           </FloatingLayer>
         </div>
       </div>
+
+      <motion.div
+        className="pointer-events-none absolute inset-x-6 bottom-8 z-30 md:inset-x-10 md:bottom-10"
+        style={{ opacity: bannerOpacity, y: bannerY, scale: bannerScale }}
+      >
+        <div className="mx-auto max-w-6xl">
+          <div className="relative overflow-hidden rounded-[1.8rem] border border-white/10 bg-black/20 shadow-ember">
+            <div className="relative aspect-[2.45] min-h-[8rem] w-full md:min-h-[12rem]">
+              <Image
+                src="/images/character/banner1.jpg"
+                alt="Hero banner transition artwork"
+                fill
+                className="object-cover object-center"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/38 via-transparent to-black/24" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)]/48 via-transparent to-transparent" />
+              <div className="absolute left-5 top-5 h-px w-20 bg-[var(--color-accent)]/55 md:left-8 md:top-8 md:w-28" />
+              <div className="absolute bottom-5 left-5 max-w-sm md:bottom-8 md:left-8">
+                <p className="text-[0.65rem] uppercase tracking-[0.36em] text-[var(--color-text-secondary)] md:text-[0.72rem]">
+                  banner / emergence
+                </p>
+                <p className="mt-3 text-sm uppercase tracking-[0.18em] text-[var(--color-text-primary)] md:text-base">
+                  The next layer rises only after the gaze settles.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
