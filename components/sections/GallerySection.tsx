@@ -20,7 +20,7 @@ export function GallerySection() {
 
   return (
     <section className="px-6 py-24 md:px-10 md:py-32">
-      <div className="mx-auto max-w-7xl space-y-14">
+      <div className="mx-auto max-w-7xl space-y-12">
         <Reveal>
           <SectionTitle
             eyebrow="Gallery / Evidence"
@@ -29,7 +29,7 @@ export function GallerySection() {
           />
         </Reveal>
 
-        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+        <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
           <Reveal delay={0.08}>
             <ThemedPanel className="relative overflow-hidden p-5">
               <div className="relative aspect-[0.84] overflow-hidden rounded-[22px] border border-white/10">
@@ -52,7 +52,7 @@ export function GallerySection() {
             </ThemedPanel>
           </Reveal>
 
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
             {evidenceItems.map((item, index) => (
               <Reveal key={item.id} delay={0.12 + index * 0.08}>
                 <motion.button
@@ -60,8 +60,8 @@ export function GallerySection() {
                   onClick={() => setActiveIndex(index)}
                   className={cn(
                     "group text-left",
-                    index === 1 ? "md:translate-y-8" : "",
-                    index === 2 ? "md:-translate-y-4" : ""
+                    index === 1 ? "md:translate-y-4" : "",
+                    index === 2 ? "md:-translate-y-2" : ""
                   )}
                   whileHover={{
                     x: index % 2 === 0 ? motionPreset.hoverShiftDistance : -motionPreset.hoverShiftDistance,
@@ -83,7 +83,7 @@ export function GallerySection() {
                       ) : null}
                       <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)]/65 to-transparent" />
                     </div>
-                    <div className="flex items-center justify-between gap-4 px-1 pb-1 pt-4">
+                    <div className="flex items-center justify-between gap-4 px-1 pb-1 pt-5">
                       <span className="text-[0.68rem] uppercase tracking-[0.32em] text-[var(--color-text-secondary)]">
                         {item.label}
                       </span>

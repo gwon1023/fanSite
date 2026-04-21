@@ -12,7 +12,7 @@ import { infectedTheme } from "@/config/theme";
 export function IdentitySection() {
   return (
     <section className="px-6 py-24 md:px-10 md:py-32">
-      <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
         <Reveal>
           <SectionTitle
             eyebrow="Identity"
@@ -24,14 +24,14 @@ export function IdentitySection() {
         <Reveal delay={0.15}>
           <ThemedPanel className="relative overflow-hidden p-8 md:p-10">
             <div className="absolute inset-0">
-              <DerivedImageLayer asset={derivedAssets.blurredCrop} className="scale-[1.16]" />
+              <DerivedImageLayer asset={derivedAssets.verticalCorridor} className="scale-[1.18]" />
             </div>
             <div className="absolute inset-0">
               <DerivedImageLayer asset={derivedAssets.blurredCity} className="scale-[1.22]" />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-br from-black/35 via-black/45 to-black/70" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/42 via-black/48 to-black/72" />
             <div className="absolute right-8 top-8 h-px w-28" style={{ background: "rgba(139, 17, 22, 0.5)" }} />
-            <div className="relative grid gap-10">
+            <div className="relative grid gap-8">
               <div className="relative min-h-[16rem]">
                 {siteContent.identity.keywords.map((keyword, index) => (
                   <motion.span
@@ -57,8 +57,8 @@ export function IdentitySection() {
                 ))}
               </div>
 
-              <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-                <div className="space-y-5 text-sm leading-7 text-[var(--color-text-secondary)]">
+              <div className="grid gap-6 md:grid-cols-[1.05fr_0.95fr]">
+                <div className="space-y-4 text-sm leading-7 text-[var(--color-text-secondary)]">
                   {siteContent.identity.intro.map((line, index) => (
                     <p key={line} className={index === 1 ? "text-[var(--color-text-primary)]" : undefined}>
                       {line}

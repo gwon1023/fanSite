@@ -7,7 +7,7 @@ import { derivedAssets, siteContent } from "@/config/content";
 export function NarrativeSection() {
   return (
     <section className="px-6 py-24 md:px-10 md:py-32">
-      <div className="mx-auto max-w-7xl space-y-14">
+      <div className="mx-auto max-w-7xl space-y-12">
         <Reveal>
           <SectionTitle
             eyebrow="World / Narrative"
@@ -16,7 +16,7 @@ export function NarrativeSection() {
           />
         </Reveal>
 
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
           <Reveal delay={0.1}>
             <ThemedPanel className="relative space-y-6 overflow-hidden p-8 md:p-10">
               <div className="absolute inset-0">
@@ -30,7 +30,7 @@ export function NarrativeSection() {
                 >
                   {siteContent.narrative.highlight}
                 </p>
-                <div className="space-y-5 text-sm leading-7 text-[var(--color-text-secondary)]">
+                <div className="space-y-4 text-sm leading-7 text-[var(--color-text-secondary)]">
                   {siteContent.narrative.fragments.map((fragment, index) => (
                     <p
                       key={fragment}
@@ -38,10 +38,10 @@ export function NarrativeSection() {
                         index === 0
                           ? "max-w-[21rem]"
                           : index === 1
-                            ? "ml-12 max-w-[24rem]"
+                            ? "ml-8 max-w-[24rem]"
                             : index === 2
-                              ? "ml-6 max-w-[20rem]"
-                              : "ml-20 max-w-[24rem]"
+                              ? "ml-4 max-w-[20rem]"
+                              : "ml-12 max-w-[24rem]"
                       }
                     >
                       {fragment}
@@ -52,10 +52,10 @@ export function NarrativeSection() {
             </ThemedPanel>
           </Reveal>
 
-          <div className="grid gap-5">
+          <div className="grid gap-6">
             {siteContent.narrative.notes.map((note, index) => (
               <Reveal key={note} delay={0.18 + index * 0.08}>
-                <ThemedPanel className={index === 1 ? "ml-auto max-w-[34rem] p-7" : "max-w-[32rem] p-7"}>
+                <ThemedPanel className={index === 1 ? "ml-auto max-w-[34rem] p-8" : "max-w-[34rem] p-8"}>
                   <p className="text-[0.8rem] uppercase tracking-[0.24em] text-[var(--color-text-secondary)]">
                     {note}
                   </p>
