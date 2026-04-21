@@ -58,11 +58,7 @@ export function GallerySection() {
                 <motion.button
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className={cn(
-                    "group text-left",
-                    index === 1 ? "md:translate-y-4" : "",
-                    index === 2 ? "md:-translate-y-2" : ""
-                  )}
+                  className={cn("group h-full text-left")}
                   whileHover={{
                     x: index % 2 === 0 ? motionPreset.hoverShiftDistance : -motionPreset.hoverShiftDistance,
                     y: -2,
@@ -70,7 +66,7 @@ export function GallerySection() {
                   transition={{ duration: infectedTheme.motionFast, ease: infectedTheme.easingPrimary }}
                 >
                   <ThemedPanel
-                    className="overflow-hidden p-4 transition-colors duration-500"
+                    className="flex h-full flex-col overflow-hidden p-4 transition-colors duration-500"
                     style={activeIndex === index ? { borderColor: "rgba(139, 17, 22, 0.4)" } : undefined}
                   >
                     <div className="relative aspect-[1.1] overflow-hidden rounded-[20px] border border-white/10">

@@ -228,14 +228,14 @@ export const evidenceItems: EvidenceItem[] = [
     title: "corridor drift",
     note: "Urban depth begins reading as a held breath instead of distance.",
     primaryAsset: "verticalCorridor",
-    secondaryAsset: "blurredCrop",
+    secondaryAsset: "blurredCity",
   },
   {
     id: "evidence-03",
     label: "contrast file",
     title: "subject outline",
     note: "Edges sharpen only after the background has already darkened around them.",
-    primaryAsset: "highContrastCrop",
+    primaryAsset: "verticalCorridor",
     secondaryAsset: "darkCity",
   },
   {
@@ -243,7 +243,7 @@ export const evidenceItems: EvidenceItem[] = [
     label: "afterimage",
     title: "residual witness",
     note: "The frame keeps a silhouette even after the face appears to soften.",
-    primaryAsset: "silhouetteCrop",
-    secondaryAsset: "blurredCity",
+    primaryAsset: "fullCity",
+    secondaryAsset: "redHazeCity",
   },
 ];

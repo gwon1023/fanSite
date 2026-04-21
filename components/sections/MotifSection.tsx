@@ -30,17 +30,17 @@ export function MotifSection() {
           <div className="relative grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {siteContent.motifs.words.map((motif, index) => (
               <FloatingLayer key={motif} delay={index * 0.16} className="relative">
-              <motion.span
-                className="flex min-h-[6.5rem] items-center rounded-[1.5rem] border border-white/10 bg-white/[0.03] px-5 py-4 font-display text-lg uppercase tracking-[0.24em] text-[var(--color-text-primary)] md:text-2xl"
-                whileHover={{
-                  x: infectedTheme.hoverShift,
-                  borderColor: infectedTheme.accent,
-                  color: infectedTheme.textPrimary,
-                }}
-                transition={{ duration: infectedTheme.motionFast, ease: infectedTheme.easingPrimary }}
-              >
-                {motif}
-              </motion.span>
+                <motion.span
+                  className="flex min-h-[6.5rem] items-center rounded-[1.5rem] border border-white/10 bg-white/[0.03] px-5 py-4 font-display text-lg uppercase tracking-[0.24em] text-[var(--color-text-primary)] md:text-2xl"
+                  whileHover={{
+                    x: infectedTheme.hoverShift,
+                    borderColor: infectedTheme.accent,
+                    color: infectedTheme.textPrimary,
+                  }}
+                  transition={{ duration: infectedTheme.motionFast, ease: infectedTheme.easingPrimary }}
+                >
+                  {motif}
+                </motion.span>
               </FloatingLayer>
             ))}
           </div>

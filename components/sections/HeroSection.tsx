@@ -97,11 +97,6 @@ export function HeroSection() {
               <div className="absolute inset-0">
                 <DerivedImageLayer asset={derivedAssets.fullClose} />
               </div>
-              <div className="absolute inset-0 translate-x-[3px]">
-                <DerivedImageLayer
-                  asset={{ ...derivedAssets.fullClose, opacity: motionPreset.colorSplitStrength * 3.4, blendMode: "screen" }}
-                />
-              </div>
               <div
                 className="absolute inset-0 opacity-36"
                 style={{
@@ -113,7 +108,7 @@ export function HeroSection() {
                 className="absolute inset-y-0 left-[24%] w-px blur-[0.5px]"
                 style={{ background: "rgba(139, 17, 22, 0.25)" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--color-bg)]/42" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--color-bg)]/34" />
             </motion.div>
             <motion.div
               aria-hidden="true"
