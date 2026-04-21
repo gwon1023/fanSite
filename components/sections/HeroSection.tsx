@@ -18,9 +18,9 @@ export function HeroSection() {
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const bannerOpacity = useTransform(scrollYProgress, [0.52, 0.86], [0, 1]);
-  const bannerY = useTransform(scrollYProgress, [0.52, 0.86], [92, 0]);
-  const bannerScale = useTransform(scrollYProgress, [0.52, 0.86], [0.94, 1]);
+  const bannerOpacity = useTransform(scrollYProgress, [0, 0.45, 0.82], [0.32, 0.42, 1]);
+  const bannerY = useTransform(scrollYProgress, [0, 0.45, 0.82], [56, 42, 0]);
+  const bannerScale = useTransform(scrollYProgress, [0, 0.45, 0.82], [0.96, 0.97, 1]);
 
   return (
     <section ref={heroRef} className="relative min-h-screen overflow-hidden px-6 pb-32 pt-24 md:px-10 md:pb-40 md:pt-32">
