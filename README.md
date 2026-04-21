@@ -1,108 +1,144 @@
 # fanSite Prototype
 
-캐릭터 일러스트 한 장을 중심으로, 팬위키가 아니라 "캐릭터에게 감염된 조용한 디지털 공간"처럼 보이도록 만든 웹 아트형 팬 사이트 프로토타입입니다.  
-Next.js App Router 위에 TypeScript, Tailwind CSS, Motion for React, Lenis를 사용해 느리고 절제된 모션과 토큰 기반 스타일 구조를 우선 설계했습니다.
+This prototype is a web-art style character fan site built around contamination, gaze, and environmental pressure rather than straightforward character introduction. The second pass strengthens that direction by reusing only two source images and treating the whole page as a scene already occupied by the character and the city.
 
-## 실행 방법
+## Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-개발 서버: `http://localhost:3000`
-
-프로덕션 빌드:
+Production build:
 
 ```bash
 npm run build
 npm run start
 ```
 
-정적 export 결과물 확인:
+Static export for Cloudflare Pages:
 
 ```bash
 npm run build
 ```
 
-빌드가 끝나면 `out/` 디렉터리에 Cloudflare Pages가 바로 배포할 정적 파일이 생성됩니다.
+The static files are generated in `out/`.
 
-## 폴더 구조
+## Folder Structure
 
 ```text
 app/
-  layout.tsx        # 전역 메타데이터, CSS 변수 주입, Lenis 연결
-  page.tsx          # 단일 페이지 조합
-  globals.css       # 전역 배경, 기본 타이포, 표면 질감
+  layout.tsx
+  page.tsx
+  globals.css
 components/
-  sections/         # Hero, Identity, Narrative, Gallery, Motif 섹션
-  LenisProvider.tsx # 부드러운 스크롤 제어
-  NoiseOverlay.tsx  # grain/noise 오버레이
-  FloatingLayer.tsx # 약한 부유 애니메이션
-  ThemedPanel.tsx   # 패널 재질 공통 컴포넌트
-  SectionTitle.tsx  # 공통 섹션 타이틀
+  sections/
+  DerivedImageLayer.tsx
+  FloatingLayer.tsx
   GlitchAccentText.tsx
-  Reveal.tsx        # 섹션 진입 애니메이션
+  LayoutShell.tsx
+  LenisProvider.tsx
+  NoiseOverlay.tsx
+  Reveal.tsx
+  SectionTitle.tsx
+  ThemedPanel.tsx
 config/
-  theme.ts          # 캐릭터용 theme token preset
-  motion.ts         # 조정 가능한 모션/연출 수치
-  content.ts        # 정적 섹션 텍스트 및 갤러리 데이터
+  content.ts
+  motion.ts
+  theme.ts
 lib/
-  utils.ts          # 클래스 병합 유틸
+  image-style.ts
+  utils.ts
 public/images/character/
-  img1.jpg          # 메인 캐릭터 비주얼
+  close1.jpg
+  bg1.jpg
 ```
 
-## Theme Token 설명
+## Derived Image Strategy
 
-`config/theme.ts`의 `CharacterThemeTokens`는 캐릭터별 프리셋 확장을 염두에 둔 기본 토큰 구조입니다.
+This pass uses only two source files:
 
-- `background`, `backgroundSecondary`: 전체 공간의 어두운 바탕색
-- `textPrimary`, `textSecondary`: 전경 텍스트 대비 조절
-- `accent`, `accentSoft`: 붉은 강조와 잔광 흔적
-- `panelBg`, `panelBorder`, `panelBlur`: 탁한 패널 재질의 핵심 값
-- `glowColor`: 패널이나 장식선에 남는 미약한 적색 광량
-- `noiseOpacity`: 노이즈 오버레이 강도
-- `motionFast`, `motionMedium`, `motionSlow`: 인터랙션과 섹션 연출 속도 기준
-- `easingPrimary`: 전반적인 easing 통일값
-- `hoverShift`: hover 시 미세한 좌표 이동량
-- `glitchOpacity`: 텍스트 잔상 강도
+- `close1.jpg`: the character close-up
+- `bg1.jpg`: the red city corridor
 
-## 조정 가능한 모션 값 설명
+Instead of adding supporting assets, the site derives multiple scene roles from those two images using configuration only:
 
-`config/motion.ts`에서 주요 연출 강도를 한 번에 바꿀 수 있습니다.
+- Character variants: `fullClose`, `eyeCrop`, `silhouetteCrop`, `blurredCrop`, `highContrastCrop`
+- City variants: `fullCity`, `verticalCorridor`, `blurredCity`, `darkCity`, `redHazeCity`
 
-- `overlayOpacity`: 전반적인 레이어 감도
-- `sectionRevealDuration`: 섹션 등장 속도
-- `floatingAmplitude`: 부유 레이어 이동 폭
-- `floatingDuration`: 부유 주기
-- `panelBlurAmount`: 패널 blur 양
-- `accentGlowStrength`: 붉은 glow 확산 반경
-- `hoverShiftDistance`: 썸네일이나 장식 요소 hover 이동 거리
-- `textRevealStagger`: 텍스트 등장 간격의 기준값
+Each variant is defined with reusable settings such as:
 
-## 향후 확장 포인트
+- `objectPosition`
+- `scale`
+- `opacity`
+- `blur`
+- `brightness`
+- `contrast`
+- `saturate`
+- optional `blendMode`
 
-- 캐릭터별 `theme.ts` preset 추가
-- `content.ts` 분리로 다른 캐릭터/세계관 텍스트 교체
-- 갤러리 이미지 소스 교체 및 실제 모달 뷰 확장
-- 노이즈, glow, hover 강도만 재조정해 정서 밀도 미세 조정
-- 섹션 수를 늘리더라도 현재의 레이어 분리 구조를 유지한 채 확장
+This lets the same image behave as foreground subject, background surface, haze, afterimage, corridor depth, or evidence fragment without introducing new files.
 
-## Cloudflare 배포 메모
+## Adjustable Config
 
-이 프로젝트는 서버 기능이 없는 정적 프로토타입이므로 Cloudflare에서는 `Pages`의 정적 export 방식으로 배포하는 것이 가장 안정적입니다.
+Most visual intensity now lives in `config/motion.ts` so the prototype can be tuned quickly from one file.
+
+- `bgDarkness`: darkens the whole scene before text and panels sit on top
+- `overlayOpacity`: controls general overlay density
+- `redGlowOpacity`: strength of red atmospheric bloom
+- `noiseOpacity`: grain intensity
+- `heroRevealDuration`: slower opening reveal for the hero
+- `sectionRevealDuration`: reveal speed for all other sections
+- `floatAmplitude`: drift distance for suspended layers
+- `floatDuration`: drift cycle length
+- `hoverShiftDistance`: how far cards and keywords move on hover
+- `borderDelayDuration`: delayed border response timing
+- `blurAmountSoft`: gentle blur used for soft contamination
+- `blurAmountBg`: heavier blur used in deep background layers
+- `vignetteStrength`: darkens the frame edges
+- `colorSplitStrength`: very weak offset used only where a restrained split helps
+
+Color and surface materials still live in `config/theme.ts`, while `config/content.ts` holds copy, evidence data, and derived image definitions.
+
+## Effects Built From Image Reuse
+
+The stronger atmosphere in this pass comes from reusing the two images in layered ways:
+
+- Hero: full city, haze city, full close, and eye crop are stacked to create a contaminated first scene
+- Identity: blurred character and city variants sit behind drifting keywords
+- World/Narrative: the corridor crop becomes a depth axis for fragmented logs
+- Gallery/Evidence: cards use different derived presets instead of separate images
+- Motif: dark city and silhouette variants remain as almost-erased residue under the final keywords
+
+Other effects are intentionally restrained:
+
+- weak grain overlay
+- low red haze
+- delayed border response
+- subtle drift
+- text reveal
+- vignette
+- weak color split only in a few focal places
+
+## Cloudflare Deployment
+
+This project remains configured for static export:
 
 - Framework preset: `Next.js (Static HTML Export)`
 - Build command: `npx next build`
 - Build output directory: `out`
-- Production branch: `main`
 
-중요한 설정은 이미 코드에 반영되어 있습니다.
+Key settings are in `next.config.ts`:
 
-- `output: "export"`: Next.js가 `out/` 정적 산출물을 생성
-- `images.unoptimized: true`: 정적 export에서 지원되지 않는 기본 이미지 최적화 경로 비활성화
-- `trailingSlash: true`: 정적 호스팅 환경에서 경로 매칭을 더 단순하게 유지
+- `output: "export"`
+- `images.unoptimized: true`
+- `trailingSlash: true`
 
-따라서 Cloudflare의 일반 Next.js SSR/Workers 프리셋 대신, 이 프로젝트는 정적 export 프리셋으로 배포해야 합니다.  
-만약 Cloudflare에서 `Node.js Compatibility` 관련 오류가 보였다면, 서버 런타임 경로로 감지되거나 잘못된 프리셋으로 배포된 경우일 가능성이 큽니다.
+## Possible Next-Step Assets
+
+If a later pass allows additional assets, the most useful additions would be:
+
+- a second city image with a different distance scale
+- a dedicated monochrome detail texture for panel contamination
+- one sparse emblem or symbol graphic for repeated system marks
+- one alternate close-up with a different gaze direction for stronger narrative contrast

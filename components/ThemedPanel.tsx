@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import { motionPreset } from "@/config/motion";
 import { infectedTheme } from "@/config/theme";
@@ -19,6 +19,7 @@ export function ThemedPanel({ children, className, style }: ThemedPanelProps) {
         borderColor: infectedTheme.panelBorder,
         backdropFilter: `blur(${motionPreset.panelBlurAmount}px)`,
         boxShadow: `0 18px 60px rgba(0,0,0,0.34), 0 0 ${motionPreset.accentGlowStrength}px ${infectedTheme.glowColor}`,
+        transition: `border-color ${motionPreset.borderDelayDuration}s ease, box-shadow ${motionPreset.borderDelayDuration}s ease, transform ${infectedTheme.motionMedium}s ease`,
         ...style,
       }}
     >

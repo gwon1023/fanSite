@@ -17,7 +17,7 @@ export function Reveal({ children, className, delay = 0, amount = 0.2 }: RevealP
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 28, filter: "blur(5px)" }}
+      initial={{ opacity: 0, y: 28, filter: `blur(${motionPreset.blurAmountSoft}px)` }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, amount }}
       transition={{

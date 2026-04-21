@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { motionPreset } from "@/config/motion";
 import { infectedTheme } from "@/config/theme";
@@ -17,10 +17,10 @@ export function FloatingLayer({ children, className, delay = 0 }: FloatingLayerP
     <motion.div
       className={className}
       animate={{
-        y: [-motionPreset.floatingAmplitude / 2, motionPreset.floatingAmplitude / 2, -motionPreset.floatingAmplitude / 2],
+        y: [-motionPreset.floatAmplitude / 2, motionPreset.floatAmplitude / 2, -motionPreset.floatAmplitude / 2],
       }}
       transition={{
-        duration: motionPreset.floatingDuration,
+        duration: motionPreset.floatDuration,
         ease: infectedTheme.easingPrimary,
         repeat: Number.POSITIVE_INFINITY,
         repeatType: "mirror",

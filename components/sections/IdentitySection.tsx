@@ -2,11 +2,11 @@
 
 import { motion } from "motion/react";
 
+import { DerivedImageLayer } from "@/components/DerivedImageLayer";
 import { Reveal } from "@/components/Reveal";
 import { SectionTitle } from "@/components/SectionTitle";
 import { ThemedPanel } from "@/components/ThemedPanel";
-import { motionPreset } from "@/config/motion";
-import { siteContent } from "@/config/content";
+import { derivedAssets, siteContent } from "@/config/content";
 import { infectedTheme } from "@/config/theme";
 
 export function IdentitySection() {
@@ -16,16 +16,23 @@ export function IdentitySection() {
         <Reveal>
           <SectionTitle
             eyebrow="Identity"
-            title="The Character Leaks Into The Frame"
-            description="설명은 적게 두고, 표면과 라벨이 먼저 말하게 둡니다. 정체성은 문장보다 배치와 잔광에서 먼저 느껴져야 합니다."
+            title={siteContent.identity.title}
+            description="The section should feel occupied before it feels explained. Keywords hover like residues on top of a surface that has already given way."
           />
         </Reveal>
 
         <Reveal delay={0.15}>
           <ThemedPanel className="relative overflow-hidden p-8 md:p-10">
+            <div className="absolute inset-0">
+              <DerivedImageLayer asset={derivedAssets.blurredCrop} className="scale-[1.16]" />
+            </div>
+            <div className="absolute inset-0">
+              <DerivedImageLayer asset={derivedAssets.blurredCity} className="scale-[1.22]" />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-br from-black/35 via-black/45 to-black/70" />
             <div className="absolute right-8 top-8 h-px w-28" style={{ background: "rgba(139, 17, 22, 0.5)" }} />
-            <div className="grid gap-10">
-              <div className="relative min-h-[14rem]">
+            <div className="relative grid gap-10">
+              <div className="relative min-h-[16rem]">
                 {siteContent.identity.keywords.map((keyword, index) => (
                   <motion.span
                     key={keyword}
@@ -39,6 +46,7 @@ export function IdentitySection() {
                     }}
                     whileHover={{
                       x: infectedTheme.hoverShift,
+                      opacity: 1,
                       color: infectedTheme.textPrimary,
                       borderColor: infectedTheme.accent,
                     }}

@@ -1,4 +1,4 @@
-import { infectedTheme } from "@/config/theme";
+import { motionPreset } from "@/config/motion";
 
 export function NoiseOverlay() {
   return (
@@ -6,7 +6,7 @@ export function NoiseOverlay() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-10 mix-blend-soft-light"
       style={{
-        opacity: infectedTheme.noiseOpacity,
+        opacity: motionPreset.noiseOpacity,
         backgroundImage: `
           radial-gradient(circle at 20% 20%, rgba(255,255,255,0.14) 0 0.7px, transparent 0.8px),
           radial-gradient(circle at 80% 30%, rgba(255,255,255,0.1) 0 0.9px, transparent 1px),

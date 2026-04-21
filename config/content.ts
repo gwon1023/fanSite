@@ -1,70 +1,249 @@
-export type GalleryItem = {
+import type { CSSProperties } from "react";
+
+export type DerivedImageAsset = {
+  id:
+    | "fullClose"
+    | "eyeCrop"
+    | "silhouetteCrop"
+    | "blurredCrop"
+    | "highContrastCrop"
+    | "fullCity"
+    | "verticalCorridor"
+    | "blurredCity"
+    | "darkCity"
+    | "redHazeCity";
   src: string;
   alt: string;
-  caption: string;
-  variant: "portrait" | "detail" | "fracture" | "silhouette";
   objectPosition: string;
+  scale: number;
+  opacity: number;
+  blur: number;
+  brightness: number;
+  contrast: number;
+  saturate: number;
+  blendMode?: CSSProperties["mixBlendMode"];
+  variant: "character" | "city";
+};
+
+export type EvidenceItem = {
+  id: string;
+  label: string;
+  title: string;
+  note: string;
+  primaryAsset: DerivedImageAsset["id"];
+  secondaryAsset?: DerivedImageAsset["id"];
+};
+
+export const derivedAssets: Record<DerivedImageAsset["id"], DerivedImageAsset> = {
+  fullClose: {
+    id: "fullClose",
+    src: "/images/character/close1.jpg",
+    alt: "Close character portrait",
+    objectPosition: "52% 24%",
+    scale: 1,
+    opacity: 0.94,
+    blur: 0,
+    brightness: 0.92,
+    contrast: 1.12,
+    saturate: 1.02,
+    variant: "character",
+  },
+  eyeCrop: {
+    id: "eyeCrop",
+    src: "/images/character/close1.jpg",
+    alt: "Character eye crop",
+    objectPosition: "38% 25%",
+    scale: 1.9,
+    opacity: 0.9,
+    blur: 0,
+    brightness: 1,
+    contrast: 1.28,
+    saturate: 1.18,
+    blendMode: "screen",
+    variant: "character",
+  },
+  silhouetteCrop: {
+    id: "silhouetteCrop",
+    src: "/images/character/close1.jpg",
+    alt: "Character silhouette crop",
+    objectPosition: "58% 50%",
+    scale: 1.25,
+    opacity: 0.42,
+    blur: 1.2,
+    brightness: 0.45,
+    contrast: 1.5,
+    saturate: 0.6,
+    blendMode: "multiply",
+    variant: "character",
+  },
+  blurredCrop: {
+    id: "blurredCrop",
+    src: "/images/character/close1.jpg",
+    alt: "Blurred character crop",
+    objectPosition: "64% 30%",
+    scale: 1.35,
+    opacity: 0.3,
+    blur: 9,
+    brightness: 0.82,
+    contrast: 1.1,
+    saturate: 0.7,
+    variant: "character",
+  },
+  highContrastCrop: {
+    id: "highContrastCrop",
+    src: "/images/character/close1.jpg",
+    alt: "High contrast character crop",
+    objectPosition: "50% 32%",
+    scale: 1.12,
+    opacity: 0.75,
+    blur: 0,
+    brightness: 1.05,
+    contrast: 1.55,
+    saturate: 0.78,
+    variant: "character",
+  },
+  fullCity: {
+    id: "fullCity",
+    src: "/images/character/bg1.jpg",
+    alt: "Red city background",
+    objectPosition: "50% 58%",
+    scale: 1,
+    opacity: 0.5,
+    blur: 0,
+    brightness: 0.5,
+    contrast: 1.1,
+    saturate: 0.92,
+    variant: "city",
+  },
+  verticalCorridor: {
+    id: "verticalCorridor",
+    src: "/images/character/bg1.jpg",
+    alt: "Vertical city corridor crop",
+    objectPosition: "50% 40%",
+    scale: 1.26,
+    opacity: 0.66,
+    blur: 0,
+    brightness: 0.54,
+    contrast: 1.2,
+    saturate: 1.04,
+    variant: "city",
+  },
+  blurredCity: {
+    id: "blurredCity",
+    src: "/images/character/bg1.jpg",
+    alt: "Blurred city crop",
+    objectPosition: "48% 38%",
+    scale: 1.18,
+    opacity: 0.34,
+    blur: 11,
+    brightness: 0.48,
+    contrast: 1.08,
+    saturate: 0.95,
+    variant: "city",
+  },
+  darkCity: {
+    id: "darkCity",
+    src: "/images/character/bg1.jpg",
+    alt: "Dark city crop",
+    objectPosition: "52% 68%",
+    scale: 1.14,
+    opacity: 0.24,
+    blur: 2,
+    brightness: 0.32,
+    contrast: 1.18,
+    saturate: 0.76,
+    blendMode: "multiply",
+    variant: "city",
+  },
+  redHazeCity: {
+    id: "redHazeCity",
+    src: "/images/character/bg1.jpg",
+    alt: "Red haze city crop",
+    objectPosition: "52% 46%",
+    scale: 1.32,
+    opacity: 0.3,
+    blur: 14,
+    brightness: 0.9,
+    contrast: 1.3,
+    saturate: 1.5,
+    blendMode: "screen",
+    variant: "city",
+  },
 };
 
 export const siteContent = {
   hero: {
     name: "KARAN",
-    codename: "specimen / red-01",
-    statement: "The screen keeps its order, but her gaze has already rewritten the rules.",
+    codename: "observer / red corridor",
+    statement: "The city was already lit before her gaze reached the frame.",
+    subline: "Nothing here introduces her. The space has already adjusted.",
   },
   identity: {
+    title: "Identity Settles Into The Surface",
     intro: [
-      "She does not arrive with noise. The page is simply less stable after she is present.",
-      "The red is not decoration. It behaves more like a warning that learned restraint.",
-      "Every aligned edge survives, but only after a slight surrender.",
+      "She behaves less like a subject and more like a condition the page has accepted.",
+      "Red persists only where attention has become irreversible.",
+      "Every clean edge survives with a small amount of surrender still attached.",
     ],
-    keywords: ["residual signal", "measured fracture", "mute static", "borrowed warmth", "held breath"],
-    labels: ["observer-bound", "low lux", "slow response", "single point failure", "soft corruption"],
+    keywords: ["retinal lock", "soft breach", "measured static", "borrowed corridor", "silent pressure"],
+    labels: ["tracebound", "low visibility", "delayed response", "residual subject", "quiet contamination"],
   },
   narrative: {
+    title: "The World Keeps Notes After Contact",
     fragments: [
-      "The room was archived before the lights dimmed.",
-      "No one recalls when the logs started speaking in singular pronouns.",
-      "The signal stayed polite. That was the first mistake.",
-      "She is not inside the system. The system has started to imitate her posture.",
+      "The alley kept its geometry. Only the light became personal.",
+      "No one recorded an arrival. The system simply started speaking in proximity.",
+      "Distance failed first. Then the archive learned to breathe slower.",
+      "The city does not host her. It reorganizes itself around the fact of being seen.",
     ],
     notes: [
-      "[trace 03] cursor latency increased after eye contact with the primary frame.",
-      "[note 12] red lines appear only where a decision has already been made.",
-      "[archive] audio remained clean, but every silence carried additional weight.",
+      "[trace 03] corridor depth increased after repeated visual contact with the primary subject.",
+      "[log 09] red persistence remained localized to decisions, thresholds, and eyes.",
+      "[archive] all silence measurements rose without a matching change in sound.",
     ],
-    highlight: "The world does not orbit her. It quietly learns her tension.",
+    highlight: "What looks like atmosphere is actually compliance.",
   },
-  motifs: ["eye", "fracture", "static", "silence", "red", "distortion"],
+  evidence: {
+    title: "Evidence Never Looks Neutral For Long",
+  },
+  motifs: {
+    title: "Residual Terms The System Could Not Flush",
+    words: ["eye", "corridor", "static", "compliance", "red", "residue", "threshold"],
+    linger: "The interface remains usable. The hesitation is what stays behind.",
+  },
 };
 
-export const galleryItems: GalleryItem[] = [
+export const evidenceItems: EvidenceItem[] = [
   {
-    src: "/images/character/img1.jpg",
-    alt: "Character portrait with red gaze",
-    caption: "specimen 01 / full frame",
-    variant: "portrait",
-    objectPosition: "center 24%",
+    id: "evidence-01",
+    label: "close record",
+    title: "retinal spiral",
+    note: "Primary fixation remains strongest at the left eye threshold.",
+    primaryAsset: "eyeCrop",
+    secondaryAsset: "redHazeCity",
   },
   {
-    src: "/images/character/img1.jpg",
-    alt: "Close detail of the character eye",
-    caption: "trace 02 / retinal bloom",
-    variant: "detail",
-    objectPosition: "32% 28%",
+    id: "evidence-02",
+    label: "surface record",
+    title: "corridor drift",
+    note: "Urban depth begins reading as a held breath instead of distance.",
+    primaryAsset: "verticalCorridor",
+    secondaryAsset: "blurredCrop",
   },
   {
-    src: "/images/character/img1.jpg",
-    alt: "Glitched character silhouette",
-    caption: "trace 07 / contour slip",
-    variant: "silhouette",
-    objectPosition: "58% 40%",
+    id: "evidence-03",
+    label: "contrast file",
+    title: "subject outline",
+    note: "Edges sharpen only after the background has already darkened around them.",
+    primaryAsset: "highContrastCrop",
+    secondaryAsset: "darkCity",
   },
   {
-    src: "/images/character/img1.jpg",
-    alt: "Distorted fragment of the illustration",
-    caption: "trace 11 / fracture hold",
-    variant: "fracture",
-    objectPosition: "70% 18%",
+    id: "evidence-04",
+    label: "afterimage",
+    title: "residual witness",
+    note: "The frame keeps a silhouette even after the face appears to soften.",
+    primaryAsset: "silhouetteCrop",
+    secondaryAsset: "blurredCity",
   },
 ];

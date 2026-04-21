@@ -1,7 +1,8 @@
+import { DerivedImageLayer } from "@/components/DerivedImageLayer";
 import { Reveal } from "@/components/Reveal";
 import { SectionTitle } from "@/components/SectionTitle";
 import { ThemedPanel } from "@/components/ThemedPanel";
-import { siteContent } from "@/config/content";
+import { derivedAssets, siteContent } from "@/config/content";
 
 export function NarrativeSection() {
   return (
@@ -10,26 +11,43 @@ export function NarrativeSection() {
         <Reveal>
           <SectionTitle
             eyebrow="World / Narrative"
-            title="Recovered Fragments From A System That Stayed Too Close"
-            description="연속적인 설명보다 기록 조각, 관찰 메모, 남겨진 문장을 중심에 둡니다. 세계관과 캐릭터가 분리되지 않는 감각을 만드는 섹션입니다."
+            title={siteContent.narrative.title}
+            description="Fragments sit at different depths of the same corridor, as if the world itself is leaving delayed notes after sustained contact."
           />
         </Reveal>
 
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
           <Reveal delay={0.1}>
-            <ThemedPanel className="space-y-6 p-8 md:p-10">
-              <p
-                className="border-l pl-4 text-sm uppercase tracking-[0.28em] text-[var(--color-text-primary)]"
-                style={{ borderColor: "rgba(139, 17, 22, 0.4)" }}
-              >
-                {siteContent.narrative.highlight}
-              </p>
-              <div className="space-y-5 text-sm leading-7 text-[var(--color-text-secondary)]">
-                {siteContent.narrative.fragments.map((fragment, index) => (
-                  <p key={fragment} className={index === 2 ? "ml-6 max-w-[24rem]" : "max-w-[28rem]"}>
-                    {fragment}
-                  </p>
-                ))}
+            <ThemedPanel className="relative space-y-6 overflow-hidden p-8 md:p-10">
+              <div className="absolute inset-0">
+                <DerivedImageLayer asset={derivedAssets.verticalCorridor} className="scale-[1.08]" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/75" />
+              <div className="relative space-y-6">
+                <p
+                  className="border-l pl-4 text-sm uppercase tracking-[0.28em] text-[var(--color-text-primary)]"
+                  style={{ borderColor: "rgba(139, 17, 22, 0.4)" }}
+                >
+                  {siteContent.narrative.highlight}
+                </p>
+                <div className="space-y-5 text-sm leading-7 text-[var(--color-text-secondary)]">
+                  {siteContent.narrative.fragments.map((fragment, index) => (
+                    <p
+                      key={fragment}
+                      className={
+                        index === 0
+                          ? "max-w-[21rem]"
+                          : index === 1
+                            ? "ml-12 max-w-[24rem]"
+                            : index === 2
+                              ? "ml-6 max-w-[20rem]"
+                              : "ml-20 max-w-[24rem]"
+                      }
+                    >
+                      {fragment}
+                    </p>
+                  ))}
+                </div>
               </div>
             </ThemedPanel>
           </Reveal>
