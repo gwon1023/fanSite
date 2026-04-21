@@ -26,13 +26,13 @@ export function LayoutShell({ children }: LayoutShellProps) {
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(180deg, rgba(6,6,8,${motionPreset.bgDarkness}) 0%, rgba(10,10,12,0.08) 34%, rgba(6,6,8,0.72) 100%)`,
+            background: `linear-gradient(180deg, rgba(6,6,8,${motionPreset.bgDarkness}) 0%, rgba(10,10,12,0.03) 36%, rgba(6,6,8,0.48) 100%)`,
           }}
         />
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(circle at center, transparent 32%, rgba(0,0,0,${motionPreset.vignetteStrength}) 100%)`,
+            background: `radial-gradient(circle at center, transparent 38%, rgba(0,0,0,${motionPreset.vignetteStrength}) 100%)`,
           }}
         />
         <div

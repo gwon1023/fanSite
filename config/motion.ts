@@ -19,9 +19,9 @@ export type MotionPreset = {
 };
 
 export const motionPreset: MotionPreset = {
-  bgDarkness: 0.46,
-  overlayOpacity: 0.1,
-  redGlowOpacity: 0.2,
+  bgDarkness: 0.24,
+  overlayOpacity: 0.035,
+  redGlowOpacity: 0.14,
   noiseOpacity: 0.11,
   heroRevealDuration: 1.45,
   sectionRevealDuration: 1.08,
@@ -30,9 +30,9 @@ export const motionPreset: MotionPreset = {
   hoverShiftDistance: 6,
   borderDelayDuration: 0.42,
   blurAmountSoft: 5,
-  blurAmountBg: 12,
-  vignetteStrength: 0.34,
-  colorSplitStrength: 0.018,
+  blurAmountBg: 4,
+  vignetteStrength: 0.18,
+  colorSplitStrength: 0.012,
   panelBlurAmount: 14,
   accentGlowStrength: 28,
   textRevealStagger: 0.12,
